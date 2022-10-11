@@ -5,7 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypegooseModule } from 'nestjs-typegoose';
 import { getMongoDbConfig } from './config/mongo.config';
 import { TrackModule } from './track/track.module';
-import { MusicianModule } from './musician/musician.module';
+import { PlaylistModule } from './playlist/playlist.module';
 
 @Module({
   imports: [
@@ -18,7 +18,7 @@ import { MusicianModule } from './musician/musician.module';
     AuthModule,
     UserModule,
     TrackModule,
-    MusicianModule,
+    PlaylistModule,
   ],
 })
 export class AppModule {}
