@@ -9,6 +9,7 @@ export class UserModel extends TimeStamps {
   @prop()
   name: string;
 
+  @ApiProperty({ example: 'tusvel@yandex.ru', description: 'Почтовый адрес' })
   @prop({ unique: true })
   email: string;
 
