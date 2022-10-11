@@ -2,9 +2,9 @@ import { prop } from '@typegoose/typegoose';
 import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
 import { ApiProperty } from '@nestjs/swagger';
 
-export interface UserModel extends Base {}
+export interface TrackModel extends Base {}
 
-export class UserModel extends TimeStamps {
+export class TrackModel extends TimeStamps {
   @ApiProperty({ example: 'tusvel', description: 'Username пользователя' })
   @prop()
   name: string;
