@@ -6,7 +6,6 @@ import { TypegooseModule } from 'nestjs-typegoose';
 import { getMongoDbConfig } from './config/mongo.config';
 import { TrackModule } from './track/track.module';
 import { MusicianModule } from './musician/musician.module';
-import { TrackModule } from './track/track.module';
 
 @Module({
   imports: [
