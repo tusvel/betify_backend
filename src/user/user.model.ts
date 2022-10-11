@@ -18,8 +18,12 @@ export class UserModel extends TimeStamps {
   @prop()
   password: string;
 
+  @ApiProperty({ example: [64746923936, 15775437865], description: 'Подписки' })
+  @prop({ ref: () => UserModel })
+  subscriptions: Ref<UserModel>[];
+
   @ApiProperty({ example: 2936, description: 'Количество подписчиков' })
-  @prop()
+  @prop({ default: 0 })
   subscribers: number;
 
   @ApiProperty({ example: [98346923936, 47375437865], description: 'Треки' })
