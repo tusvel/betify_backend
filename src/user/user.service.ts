@@ -34,4 +34,15 @@ export class UserService {
   async like() {}
 
   async dislike() {}
+
+  async addHistory(_id: Types.ObjectId, trackId: Types.ObjectId) {
+    const user = await this.UserModel.findById(_id);
+
+    if (user.history.pop() === trackId) {
+      return false;
+    }
+
+    user.history = [...user.history, trackId];
+    await user.save();
+  }
 }

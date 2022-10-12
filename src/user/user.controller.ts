@@ -18,4 +18,14 @@ export class UserController {
   ) {
     return this.userService.subscribe(_id, userId);
   }
+
+  @Put('history')
+  @HttpCode(200)
+  @Auth()
+  async history(
+    @User('_id') _id: Types.ObjectId,
+    @Body('trackId', IdValidationPipe) trackId: Types.ObjectId,
+  ) {
+    return this.userService.addHistory(_id, trackId);
+  }
 }
