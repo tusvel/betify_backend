@@ -6,6 +6,7 @@ import { TypegooseModule } from 'nestjs-typegoose';
 import { getMongoDbConfig } from './config/mongo.config';
 import { TrackModule } from './track/track.module';
 import { PlaylistModule } from './playlist/playlist.module';
+import { FileModule } from './file/file.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { PlaylistModule } from './playlist/playlist.module';
     UserModule,
     TrackModule,
     PlaylistModule,
+    FileModule,
   ],
 })
 export class AppModule {}
