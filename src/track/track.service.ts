@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { TrackModel } from './track.model';
 import { ModelType } from '@typegoose/typegoose/lib/types';
@@ -20,5 +20,17 @@ export class TrackService {
       user_id: _id,
     });
     return await newTrack.save();
+  }
+
+  async updateCountListens(trackId: Types.ObjectId) {
+    const updateDoc = await this.TrackModel.findByIdAndUpdate(
+      trackId,
+      {
+        $inc: { listens: 1 },
+      },
+      { new: true },
+    ).exec();
+    if (!updateDoc) throw new NotFoundException('Movie not found');
+    return updateDoc;
   }
 }

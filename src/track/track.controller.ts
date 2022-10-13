@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post, Put } from '@nestjs/common';
 import { TrackService } from './track.service';
 import { CreateTrackDto } from './dto/create-track.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -19,5 +19,13 @@ export class TrackController {
   @Auth()
   async create(@User('_id') _id: Types.ObjectId, @Body() dto: CreateTrackDto) {
     return this.trackService.create(_id, dto);
+  }
+
+  @ApiOperation({ summary: 'Увеличить кол-во прослушиваний' })
+  @ApiResponse({ status: 200, type: TrackModel })
+  @Put('update-count-listens')
+  @HttpCode(200)
+  async updateCountListens(@Body('trackId') trackId: Types.ObjectId) {
+    return this.trackService.updateCountListens(trackId);
   }
 }
