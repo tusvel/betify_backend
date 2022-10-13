@@ -3,9 +3,10 @@ import { CommentService } from './comment.service';
 import { Auth } from '../auth/decorators/auth.decorator';
 import { User } from '../user/decorators/user.decorator';
 import { Types } from 'mongoose';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { TrackModel } from '../track/track.model';
 
+@ApiTags('Comment')
 @Controller('comment')
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}

@@ -6,6 +6,13 @@ import { GenreModel } from '../genre/genre.model';
 export interface TrackModel extends Base {}
 
 export class TrackModel extends TimeStamps {
+  @ApiProperty({
+    example: '63481970234f528797ceebc4',
+    description: 'Владелец комментария',
+  })
+  @prop()
+  user_id: string;
+
   @ApiProperty({ example: 'tusvel', description: 'Название трека' })
   @prop()
   name: string;
