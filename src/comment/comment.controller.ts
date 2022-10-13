@@ -13,8 +13,8 @@ export class CommentController {
 
   @ApiOperation({ summary: 'Добавить комментарий' })
   @ApiResponse({ status: 200, type: TrackModel })
-  @Post()
   @HttpCode(200)
+  @Post()
   @Auth()
   async create(@User('_id') _id: Types.ObjectId, @Body() { text, trackId }) {
     return this.commentService.create(_id, text, trackId);

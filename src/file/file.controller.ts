@@ -19,8 +19,8 @@ export class FileController {
 
   @ApiOperation({ summary: 'Загрузка файла' })
   @ApiResponse({ status: 200, type: [FileResponse] })
-  @Post()
   @HttpCode(200)
+  @Post()
   @Auth()
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(

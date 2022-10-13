@@ -13,8 +13,8 @@ export class UserController {
 
   @ApiOperation({ summary: 'Подписка на пользователя' })
   @ApiResponse({ status: 200, type: null })
-  @Put('subscriptions')
   @HttpCode(200)
+  @Put('subscriptions')
   @Auth()
   async subscribe(
     @User('_id') _id: Types.ObjectId,
@@ -25,8 +25,8 @@ export class UserController {
 
   @ApiOperation({ summary: 'Добавить трек в историю' })
   @ApiResponse({ status: 200 })
-  @Put('history')
   @HttpCode(200)
+  @Put('history')
   @Auth()
   async history(
     @User('_id') _id: Types.ObjectId,
@@ -37,8 +37,8 @@ export class UserController {
 
   @ApiOperation({ summary: 'Like track' })
   @ApiResponse({ status: 200 })
-  @Put('like_track')
   @HttpCode(200)
+  @Put('like_track')
   @Auth()
   async like_track(
     @User('_id') _id: Types.ObjectId,
@@ -49,8 +49,8 @@ export class UserController {
 
   @ApiOperation({ summary: 'Dislike track' })
   @ApiResponse({ status: 200 })
-  @Put('dislike_track')
   @HttpCode(200)
+  @Put('dislike_track')
   @Auth()
   async dislike_track(
     @User('_id') _id: Types.ObjectId,

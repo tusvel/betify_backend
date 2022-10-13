@@ -20,8 +20,8 @@ export class GenreController {
   @ApiOperation({ summary: 'Создать жанр' })
   @ApiResponse({ status: 200, type: GenreModel })
   @UsePipes(new ValidationPipe())
-  @Post()
   @HttpCode(200)
+  @Post()
   @Auth()
   async create(@Body() dto: CreateGenreDto) {
     return this.genreService.create(dto);

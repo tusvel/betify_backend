@@ -1,4 +1,12 @@
-import { Body, Controller, HttpCode, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  Post,
+  Put,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { PlaylistService } from './playlist.service';
 import { User } from '../user/decorators/user.decorator';
 import { Types } from 'mongoose';
@@ -14,8 +22,9 @@ export class PlaylistController {
 
   @ApiOperation({ summary: 'Создание плейлиста' })
   @ApiResponse({ status: 200, type: PlaylistModel })
-  @Post()
+  @UsePipes(new ValidationPipe())
   @HttpCode(200)
+  @Post()
   @Auth()
   async create(
     @User('_id') _id: Types.ObjectId,
@@ -26,8 +35,8 @@ export class PlaylistController {
 
   @ApiOperation({ summary: 'Редактирование плейлиста' })
   @ApiResponse({ status: 200, type: PlaylistModel })
-  @Put()
   @HttpCode(200)
+  @Put()
   @Auth()
   async update(
     @User('_id') _id: Types.ObjectId,
@@ -38,8 +47,8 @@ export class PlaylistController {
 
   @ApiOperation({ summary: 'Действие с треком' })
   @ApiResponse({ status: 200, type: PlaylistModel })
-  @Put('track')
   @HttpCode(200)
+  @Put('track')
   @Auth()
   async track(@Body() { trackId, playlistId }) {
     return this.playlistService.track(trackId, playlistId);
