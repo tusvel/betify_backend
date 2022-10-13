@@ -5,7 +5,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export interface TrackModel extends Base {}
 
 export class TrackModel extends TimeStamps {
-  @ApiProperty({ example: 'tusvel', description: 'Username пользователя' })
+  @ApiProperty({ example: 'tusvel', description: 'Название трека' })
   @prop()
   name: string;
 
@@ -22,7 +22,7 @@ export class TrackModel extends TimeStamps {
   likes: number;
 
   @ApiProperty({ example: 58, description: 'Дизлайки' })
-  @prop()
+  @prop({ default: 0 })
   dislikes: number;
 
   @ApiProperty({
