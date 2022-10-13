@@ -4,11 +4,15 @@ import { User } from './decorators/user.decorator';
 import { Types } from 'mongoose';
 import { IdValidationPipe } from '../pipes/id.validation.pipe';
 import { Auth } from '../auth/decorators/auth.decorator';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('User')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @ApiOperation({ summary: 'Подписка на пользователя' })
+  @ApiResponse({ status: 200, type: null })
   @Put('subscriptions')
   @HttpCode(200)
   @Auth()
@@ -19,6 +23,8 @@ export class UserController {
     return this.userService.subscribe(_id, userId);
   }
 
+  @ApiOperation({ summary: 'Добавить трек в историю' })
+  @ApiResponse({ status: 200 })
   @Put('history')
   @HttpCode(200)
   @Auth()

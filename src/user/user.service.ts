@@ -37,12 +37,18 @@ export class UserService {
 
   async addHistory(_id: Types.ObjectId, trackId: Types.ObjectId) {
     const user = await this.UserModel.findById(_id);
+    const lastElem = user.history.shift();
 
-    if (user.history.pop() === trackId) {
+    if (String(lastElem).includes(String(trackId))) {
       return false;
+    } else if (!lastElem) {
+      user.history = [trackId];
+      await user.save();
+      return true;
     }
 
-    user.history = [...user.history, trackId];
+    user.history = [...user.history, trackId, lastElem];
     await user.save();
+    return true;
   }
 }
