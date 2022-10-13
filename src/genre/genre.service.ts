@@ -10,12 +10,7 @@ export class GenreService {
     @InjectModel(GenreModel) private readonly GenreModel: ModelType<GenreModel>,
   ) {}
 
-  async create(_id: string, dto: CreateGenreDto) {
-    return await this.GenreModel.create({
-      name: dto.name,
-      slug: dto.slug,
-      description: dto.description,
-      icon: dto.icon,
-    });
+  async create(dto: CreateGenreDto) {
+    return await this.GenreModel.create(dto);
   }
 }

@@ -1,6 +1,7 @@
-import { prop } from '@typegoose/typegoose';
+import { prop, Ref } from '@typegoose/typegoose';
 import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
 import { ApiProperty } from '@nestjs/swagger';
+import { GenreModel } from '../genre/genre.model';
 
 export interface TrackModel extends Base {}
 
@@ -38,4 +39,11 @@ export class TrackModel extends TimeStamps {
   })
   @prop()
   audio: string;
+
+  @ApiProperty({
+    example: '[63050d45102bc8b42918e61b, 6305dce76af92ec80101fafe]',
+    description: 'Жанры трека',
+  })
+  @prop({ ref: () => GenreModel })
+  genres: Ref<GenreModel>[];
 }

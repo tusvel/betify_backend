@@ -13,10 +13,7 @@ export class TrackService {
 
   async create(_id: Types.ObjectId, dto: CreateTrackDto) {
     const newTrack = await new this.TrackModel({
-      name: dto.name,
-      duration: dto.duration,
-      picture: dto.picture,
-      audio: dto.audio,
+      ...dto,
       user_id: _id,
     });
     return await newTrack.save();

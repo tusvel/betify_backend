@@ -1,4 +1,4 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsArray, IsNumber, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateTrackDto {
@@ -23,4 +23,12 @@ export class CreateTrackDto {
   })
   @IsString()
   audio: string;
+
+  @ApiProperty({
+    example: '[63050d45102bc8b42918e61b, 6305dce76af92ec80101fafe]',
+    description: 'Жанры трека',
+  })
+  @IsArray()
+  @IsString({ each: true })
+  genres: string[];
 }
