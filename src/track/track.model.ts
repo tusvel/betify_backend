@@ -14,11 +14,11 @@ export class TrackModel extends TimeStamps {
   duration: number;
 
   @ApiProperty({ example: 124, description: 'Количество прослушиваний' })
-  @prop()
+  @prop({ default: 0 })
   listens: number;
 
   @ApiProperty({ example: 1240, description: 'Лайки' })
-  @prop()
+  @prop({ default: 0 })
   likes: number;
 
   @ApiProperty({ example: 58, description: 'Дизлайки' })
