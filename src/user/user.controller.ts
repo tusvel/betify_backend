@@ -34,4 +34,16 @@ export class UserController {
   ) {
     return this.userService.addHistory(_id, trackId);
   }
+
+  @ApiOperation({ summary: 'Like track' })
+  @ApiResponse({ status: 200 })
+  @Put('like_track')
+  @HttpCode(200)
+  @Auth()
+  async like_track(
+    @User('_id') _id: Types.ObjectId,
+    @Body('trackId', IdValidationPipe) trackId: Types.ObjectId,
+  ) {
+    return this.userService.like_track(_id, trackId);
+  }
 }

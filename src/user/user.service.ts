@@ -31,7 +31,17 @@ export class UserService {
     }
   }
 
-  async like() {}
+  async like_track(_id: Types.ObjectId, trackId: Types.ObjectId) {
+    const user = await this.UserModel.findById(_id);
+
+    if (user.tracks.includes(trackId)) {
+      user.tracks = user.tracks.filter((id) => String(id) !== String(trackId));
+      return user.save();
+    }
+
+    user.tracks = [...user.tracks, trackId];
+    return user.save();
+  }
 
   async dislike() {}
 
