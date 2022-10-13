@@ -46,4 +46,11 @@ export class TrackModel extends TimeStamps {
   })
   @prop({ ref: () => GenreModel })
   genres: Ref<GenreModel>[];
+
+  @ApiProperty({
+    example: '[63050d45102bc8b42918e61b, 6305dce76af92ec80101fafe]',
+    description: 'Комментарии',
+  })
+  @prop({ ref: () => TrackModel })
+  comments: Ref<TrackModel>[];
 }
