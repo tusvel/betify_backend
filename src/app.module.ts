@@ -7,6 +7,7 @@ import { getMongoDbConfig } from './config/mongo.config';
 import { TrackModule } from './track/track.module';
 import { PlaylistModule } from './playlist/playlist.module';
 import { FileModule } from './file/file.module';
+import { GenreModule } from './genre/genre.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { FileModule } from './file/file.module';
     TrackModule,
     PlaylistModule,
     FileModule,
+    GenreModule,
   ],
 })
 export class AppModule {}
