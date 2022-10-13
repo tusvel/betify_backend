@@ -41,17 +41,61 @@ export class UserService {
     if (user.tracks.includes(trackId)) {
       user.tracks = user.tracks.filter((id) => String(id) !== String(trackId));
       track.likes -= 1;
-      track.save();
-      return user.save();
+      return {
+        user: await user.save(),
+        track: await track.save(),
+      };
+    }
+
+    //Если пользователь до этого дизлайкнул трек
+    if (user.dislikes_tracks.includes(trackId)) {
+      user.dislikes_tracks = user.dislikes_tracks.filter(
+        (id) => String(id) !== String(trackId),
+      );
+      track.dislikes -= 1;
+      await user.save();
+      await track.save();
     }
 
     user.tracks = [...user.tracks, trackId];
     track.likes += 1;
-    track.save();
-    return user.save();
+    return {
+      user: await user.save(),
+      track: await track.save(),
+    };
   }
 
-  async dislike() {}
+  async dislike_track(_id: Types.ObjectId, trackId: Types.ObjectId) {
+    const user = await this.UserModel.findById(_id);
+    const track = await this.TrackModel.findById(trackId);
+
+    //Если пользователь уже дизлайкнул трек
+    if (user.dislikes_tracks.includes(trackId)) {
+      user.dislikes_tracks = user.dislikes_tracks.filter(
+        (id) => String(id) !== String(trackId),
+      );
+      track.dislikes -= 1;
+      return {
+        user: await user.save(),
+        track: await track.save(),
+      };
+    }
+
+    //Если пользователь до этого лайкнул трек
+    if (user.tracks.includes(trackId)) {
+      user.tracks = user.tracks.filter((id) => String(id) !== String(trackId));
+      track.likes -= 1;
+      track.save();
+      await user.save();
+    }
+
+    user.dislikes_tracks = [...user.dislikes_tracks, trackId];
+    track.dislikes += 1;
+    return {
+      user: await user.save(),
+      track: await track.save(),
+    };
+  }
 
   async addHistory(_id: Types.ObjectId, trackId: Types.ObjectId) {
     const user = await this.UserModel.findById(_id);

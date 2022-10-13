@@ -46,4 +46,16 @@ export class UserController {
   ) {
     return this.userService.like_track(_id, trackId);
   }
+
+  @ApiOperation({ summary: 'Dislike track' })
+  @ApiResponse({ status: 200 })
+  @Put('dislike_track')
+  @HttpCode(200)
+  @Auth()
+  async dislike_track(
+    @User('_id') _id: Types.ObjectId,
+    @Body('trackId', IdValidationPipe) trackId: Types.ObjectId,
+  ) {
+    return this.userService.dislike_track(_id, trackId);
+  }
 }

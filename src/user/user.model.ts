@@ -32,6 +32,13 @@ export class UserModel extends TimeStamps {
 
   @ApiProperty({
     example: [98346923936, 47375437865],
+    description: 'Не понравившиеся треки',
+  })
+  @prop({ ref: () => TrackModel })
+  dislikes_tracks: Ref<TrackModel>[];
+
+  @ApiProperty({
+    example: [98346923936, 47375437865],
     description: 'История прослушиваний',
   })
   @prop({ ref: () => TrackModel })
