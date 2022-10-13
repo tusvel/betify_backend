@@ -3,11 +3,13 @@ import { InjectModel } from 'nestjs-typegoose';
 import { UserModel } from './user.model';
 import { ModelType } from '@typegoose/typegoose/lib/types';
 import { Types } from 'mongoose';
+import { TrackModel } from '../track/track.model';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(UserModel) private readonly UserModel: ModelType<UserModel>,
+    @InjectModel(TrackModel) private readonly TrackModel: ModelType<TrackModel>,
   ) {}
 
   async subscribe(_id: Types.ObjectId, userId: Types.ObjectId) {
@@ -33,13 +35,19 @@ export class UserService {
 
   async like_track(_id: Types.ObjectId, trackId: Types.ObjectId) {
     const user = await this.UserModel.findById(_id);
+    const track = await this.TrackModel.findById(trackId);
 
+    //Если пользователь уже лайкнул трек
     if (user.tracks.includes(trackId)) {
       user.tracks = user.tracks.filter((id) => String(id) !== String(trackId));
+      track.likes -= 1;
+      track.save();
       return user.save();
     }
 
     user.tracks = [...user.tracks, trackId];
+    track.likes += 1;
+    track.save();
     return user.save();
   }
 
